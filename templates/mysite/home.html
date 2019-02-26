@@ -1,4 +1,20 @@
 {% extends "mysite/base.html" %}
 {% block content %}
-    HOME
-{% endblock %}
+    <div>
+        {% comment %}this will need to match the variable name of the dictionary key{% endcomment %}
+        {% for post in posts %}
+            <article class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-2" href="#">{{ post.address }}</a>
+                        <small class="text-muted">{{ post.contact }}</small>
+                    </div>
+                    <h2><a class="article-title" href="#">{{ post.name }}</a></h2>
+                    {{ post.image }}
+                    <p class="article-content">{{ post.description }}</p>
+                </div>
+            </article>
+        {% endfor %}
+        <h1></h1>
+    </div>
+{% endblock content %}

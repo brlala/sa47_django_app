@@ -1,9 +1,31 @@
 from django.shortcuts import render
 
-
 # this is the logic how we want to handle when people go to our homepage, we need to map the url and function at urls.py in the project
+posts = [
+    {
+        'name': 'McDonald',
+        'rating': 4.5,
+        'description': 'This is a fast food restaurant',
+        'image': '[insert image here]',
+        'address': '352 Clementi Ave 2, #01-153, Singapore 120352',
+        'contact': '6778 2223',
+    },
+    {
+        'name': 'KFC',
+        'rating': 4.3,
+        'description': 'This is a fast food restaurant 2',
+        'image': '[insert image here]',
+        'address': '379 Clementi Ave 5',
+        'contact': '6778 4441',
+    }
+]
+
+
 def home(request):
-    return render(request, 'mysite/home.html')
+    context = {
+        'posts': posts
+    }
+    return render(request, 'mysite/home.html', context)
 
 
 members = [
@@ -14,7 +36,7 @@ members = [
     {
         'name': 'Teh Li Heng',
         'chinese_name': '郑理衡',
-        'nickname':'Henry',
+        'nickname': 'Henry',
     },
     {
         'name': 'Wang Yafeng',
