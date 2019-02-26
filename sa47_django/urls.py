@@ -14,8 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
+# if we go to blog/ it will map that to our blog.urls
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('blog_dev/', include('blog.urls')), #Commented away to map blog to make it as homepage
+    path('', include('mysite.urls'))
 ]
