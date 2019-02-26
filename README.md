@@ -6,14 +6,13 @@
 
 ### 2) Username and Password
 
-All Passwords are "password". All passwords in the database are encrypted.
+All Passwords are "P@ssword1!". 
+Admin has it's own password "admin"
 
-### Usernames
+### Usernames - Password
 
+admin			          - 	xxx@django.u.edu  
 user1			          - 	xxx@django.u.edu  
-user2			          - 	xxx@django.u.edu  
-user3			          - 	xxx@django.u.edu  
-user4			          - 	xxx@django.u.edu
 
 ### 3) System Requirements
 
