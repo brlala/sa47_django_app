@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from users import views as user_views
 
 # if we go to blog/ it will map that to our blog.urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('blog_dev/', include('blog.urls')), #Commented away to map blog to make it as homepage
-    path('', include('mysite.urls'))
+    path('', include('mysite.urls')),
+    path('register/', user_views.register, name='register'),
 ]

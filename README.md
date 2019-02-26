@@ -2,7 +2,9 @@
 
 ## 1) Installation Guide
 
-### "installation instructions to be inserted here"
+1. pip install django-crispy-forms
+2. pip install django  
+3. pip install django-rest-framework (optional) 
 
 ### 2) Username and Password
 
