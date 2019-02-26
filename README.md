@@ -1,4 +1,4 @@
-# Django Rating Comment System
+# Django Rating Comment System test
 
 ## 1) Installation Guide
 
