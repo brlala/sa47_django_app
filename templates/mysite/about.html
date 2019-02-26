@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>This is the about page</title>
-</head>
-<body>
-ABOUT
-</body>
-</html>
+{% extends "mysite/base.html" %}
+{% block content %}
+    <div>
+        <ol>
+            {#use {%  %} to access modelview key and {{  }} to access variable#}
+            {#for loop#}
+            {% for member in members %}
+                <h1>{{ member.name }}</h1>
+                <p>Chinese name: {{ member.chinese_name }}</p>
+                {# if loop#}
+                {% if member.nickname %}
+                    <p>Nickname: {{ member.nickname }}</p>
+                {% else %}
+                    <p>Chinese name: No nickname yet</p>
+                {% endif %}
+            {% endfor %}
+        </ol>
+
+    </div>
+{% endblock %}
