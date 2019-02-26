@@ -1,4 +1,5 @@
 from django.shortcuts import render
+# from .models import Post
 
 # this is the logic how we want to handle when people go to our homepage, we need to map the url and function at urls.py in the project
 posts = [
@@ -23,6 +24,7 @@ posts = [
 
 def home(request):
     context = {
+        # 'posts': Post.objects.all() #replace with this once database is created
         'posts': posts
     }
     return render(request, 'mysite/home.html', context)
