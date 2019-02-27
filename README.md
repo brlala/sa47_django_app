@@ -2,10 +2,7 @@
 
 ## 1) Installation Guide
 
-1. pip install django-crispy-forms
-2. pip install django  
-3. pip install django-rest-framework (optional)
-4. pip install pillow
+run the following code in your environment `pip install django-crispy-forms django pillow`
  
 
 ### 2) Username and Password
@@ -27,8 +24,8 @@ user1			          - 	xxx@django.u.edu
 •	Google Chrome
 
 ### 4) Authors
-•	Gao 
+•	Gao Jiaxue
 
 •	Teh Li Heng
 
-•	Yafeng
+•	Wang Yafeng
