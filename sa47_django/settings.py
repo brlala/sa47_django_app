@@ -119,3 +119,10 @@ STATIC_URL = '/static/'
 
 # to tell crispy to use bootstrap4
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = 'mysite-home'
+LOGIN_URL = 'login'
+
+# os.path.join ensures path is generated correctly for different OS for django to save uploaded files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

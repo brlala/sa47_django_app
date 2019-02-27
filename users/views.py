@@ -1,6 +1,8 @@
 from django.contrib import messages
 # from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+
 from .forms import UserRegisterForm
 
 
@@ -14,9 +16,14 @@ def register(request):
             username = form.cleaned_data.get('username')
 
             # this will show a flash message on success
-            messages.success(request, f'Account created for {username}!')
-            return redirect('mysite-home')
+            messages.success(request, f'Your account has been created. You are now able to login!')
+            return redirect('login')
 
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
+
+
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')

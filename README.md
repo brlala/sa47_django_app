@@ -4,7 +4,9 @@
 
 1. pip install django-crispy-forms
 2. pip install django  
-3. pip install django-rest-framework (optional) 
+3. pip install django-rest-framework (optional)
+4. pip install pillow
+ 
 
 ### 2) Username and Password
 
