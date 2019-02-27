@@ -27,7 +27,7 @@ user1			          - 	xxx@django.u.edu
 •	Google Chrome
 
 ### 4) Authors
-•	Gao Jiaxue
+•	Gao 
 
 •	Teh Li Heng
 
