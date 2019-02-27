@@ -24,8 +24,8 @@ user1			          - 	xxx@django.u.edu
 •	Google Chrome
 
 ### 4) Authors
-•	Gao 
+•	Gao Jiaxue
 
 •	Teh Li Heng
 
-•	Yafeng
+•	Wang Yafeng
