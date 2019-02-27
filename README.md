@@ -31,4 +31,4 @@ user1			          - 	xxx@django.u.edu
 
 •	Teh Li Heng
 
-•	Wang Yafeng
+•	Wang 
