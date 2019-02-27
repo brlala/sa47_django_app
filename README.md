@@ -7,13 +7,13 @@ run the following code in your environment `pip install django-crispy-forms djan
 
 ### 2) Username and Password
 
-All Passwords are "P@ssword1!". 
+All Passwords are "djangoapp". 
 Admin has it's own password "admin"
 
 ### Usernames - Password
 
 admin			          - 	xxx@django.u.edu  
-user1			          - 	xxx@django.u.edu  
+NewUser			          - 	xxx@django.u.edu  
 
 ### 3) System Requirements
 
