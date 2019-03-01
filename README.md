@@ -5,7 +5,14 @@
 run the following code in your environment `pip install django-crispy-forms django pillow`
  
 
-### 2) Username and Password
+### 2) System Features
+•	Profile management (pictures, last name)
+•	Performance optimization (resizing of profile pic for new users)
+    - seen under `users/models.py` method `def save(self):`
+    
+
+
+### 3) Username and Password
 
 All Passwords are "djangoapp". 
 Admin has it's own password "admin"
@@ -15,7 +22,7 @@ Admin has it's own password "admin"
 admin			          - 	xxx@django.u.edu  
 NewUser			          - 	xxx@django.u.edu  
 
-### 3) System Requirements
+### 4) System Requirements
 
 #### Tools
 •	Microsoft Visual Studio Code
@@ -23,9 +30,10 @@ NewUser			          - 	xxx@django.u.edu
 #### Recommended Browser 
 •	Google Chrome
 
-### 4) Authors
+### 5) Authors
 •	Gao Jiaxue
 
 •	Teh Li Heng
 
 •	Wang Yafeng
+

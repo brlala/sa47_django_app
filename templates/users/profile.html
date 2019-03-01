@@ -10,5 +10,18 @@
             </div>
         </div>
         <!-- FORM HERE -->
+        <!-- We're actually using 2 forms in a single field, need enctype parameter-->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Profile Info</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            {#submit button is not included in for#}
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        </form>
     </div>
 {% endblock content %}
