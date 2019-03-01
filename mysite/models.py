@@ -1,67 +1,61 @@
 from django.contrib.auth.models import User
 from django.db import models
-from users import models as users_models
-
+from users.models import Profile as Profile
 
 
 class Category(models.Model):
-    categoryid = models.CharField(max_length=6,primary_key=True)
+    category_id = models.CharField(max_length=6, primary_key=True)
     category = models.CharField(max_length=20)
-
 
     def __str__(self):
         return f'{self.category} Category'
 
+
 class Restaurant(models.Model):
-    restaurantid = models.CharField(max_length=6, primary_key=True)
+    restaurant_id = models.CharField(max_length=6, primary_key=True)
     name = models.CharField(max_length=50)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     address = models.CharField(max_length=100)
-    avgprice = models.DecimalField(max_digits=6, decimal_places=2)
-    phonenumber = models.CharField(max_length=15)
+    avg_price = models.DecimalField(max_digits=6, decimal_places=2)
+    phone_number = models.CharField(max_length=15)
     description = models.TextField()
-    starttime = models.TimeField()
-    endtime = models.TimeField()
-    restaurantpicture = models.ImageField(
-        default='reataurant.jpg', upload_to='../mysite/static/mysite/images')
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    restaurant_picture = models.ImageField(
+        default='restaurant.jpg', upload_to='../mysite/static/mysite/images/restaurant')
 
     def __str__(self):
         return f'{self.name} Restaurant'
 
 
-
 class Comment(models.Model):
-    commentid = models.CharField(max_length=6, primary_key=True)
+    comment_id = models.CharField(max_length=6, primary_key=True)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    user = models.ForeignKey(users_models.Profile,on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     comment = models.TextField()
     rating = models.SmallIntegerField()
-    commentdatetime = models.DateTimeField()
+    comment_datetime = models.DateTimeField()
 
     def __str__(self):
         return f'{self.comment} Comment'
 
 
-
-
 class Reply(models.Model):
-    replyid = models.CharField(max_length=6,primary_key=True)
+    reply_id = models.CharField(max_length=6, primary_key=True)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     reply = models.TextField()
-    replydatetime = models.DateTimeField()
+    reply_datetime = models.DateTimeField()
 
     def __str__(self):
         return f'{self.reply} Reply'
 
 
 class Notification(models.Model):
-    notificationid = models.CharField(max_length=6,primary_key=True)
-    reply = models.OneToOneField(Reply,on_delete=models.CASCADE)
+    notification_id = models.CharField(max_length=6, primary_key=True)
+    reply = models.OneToOneField(Reply, on_delete=models.CASCADE)
     url = models.URLField()
     status = models.BinaryField()
-    recipientid = models.CharField(max_length=6)
+    recipient_id = models.CharField(max_length=6)
 
     def __str__(self):
-        return f'{self.notificationid} Notification'
-
-
+        return f'{self.notification_id} Notification'
