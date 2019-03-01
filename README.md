@@ -11,7 +11,6 @@ run the following code in your environment `pip install django-crispy-forms djan
     - seen under `users/models.py` method `def save(self):`
     
 
-
 ### 3) Username and Password
 
 All Passwords are "djangoapp". 
@@ -35,5 +34,6 @@ NewUser			          - 	xxx@django.u.edu
 
 •	Teh Li Heng
 
-•	Wang Yafeng
+•	Wang Yafeng (this is a COMPUTERＶERSION copy)
+•	Wang Yafeng (this is a local copy) HEYＧＩＴＨＵＢ version
 
