@@ -34,9 +34,5 @@ NewUser			          - 	xxx@django.u.edu
 
 •	Teh Li Heng
 
-<<<<<<< HEAD
 •	Wang Yafeng (this is a local copy)
-=======
-•	Wang Yafeng （testing merge change)
->>>>>>> 9364b75e97b878a53f1554fa453266a67ab83834
 
