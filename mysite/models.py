@@ -25,7 +25,7 @@ class Restaurant(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField()
     restaurant_picture = models.ImageField(
-        default='restaurant.jpg', upload_to='../mysite/static/mysite/images/restaurant')
+        default='restaurant.jpg', upload_to='images/restaurant')
 
     def __str__(self):
         return f'{self.name} Restaurant'
