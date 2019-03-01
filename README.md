@@ -18,8 +18,10 @@ Admin has it's own password "admin"
 
 ### Usernames - Password
 
-admin			          - 	xxx@django.u.edu  
-NewUser			          - 	xxx@django.u.edu  
+admin			          - 	admin  
+comment			        - 	djangoapp  
+reply             -  djangoapp  
+manager           -  djangoapp  
 
 ### 4) System Requirements
 
@@ -34,6 +36,5 @@ NewUser			          - 	xxx@django.u.edu
 
 •	Teh Li Heng
 
-•	Wang Yafeng (this is a COMPUTERＶERSION copy)
-•	Wang Yafeng (this is a local copy) HEYＧＩＴＨＵＢ version
+•	Wang Yafeng
 
