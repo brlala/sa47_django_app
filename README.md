@@ -19,9 +19,9 @@ Admin has it's own password "admin"
 ### Usernames - Password
 
 admin			          - 	admin  
-comment			        - 	djangoapp
-reply             -  djangoapp
-manager           -  djangoapp
+comment			        - 	djangoapp  
+reply             -  djangoapp  
+manager           -  djangoapp  
 
 ### 4) System Requirements
 
