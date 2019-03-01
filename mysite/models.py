@@ -7,6 +7,9 @@ class Category(models.Model):
     category_id = models.CharField(max_length=6, primary_key=True)
     category = models.CharField(max_length=20)
 
+    class Meta:
+        verbose_name_plural = "Categories"
+
     def __str__(self):
         return f'{self.category} Category'
 
@@ -45,6 +48,9 @@ class Reply(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     reply = models.TextField()
     reply_datetime = models.DateTimeField()
+
+    class Meta:
+        verbose_name_plural = "Replies"
 
     def __str__(self):
         return f'{self.reply} Reply'
