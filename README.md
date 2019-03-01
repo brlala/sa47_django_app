@@ -35,4 +35,5 @@ NewUser			          - 	xxx@django.u.edu
 •	Teh Li Heng
 
 •	Wang Yafeng (this is a COMPUTERＶERSION copy)
+•	Wang Yafeng (this is a local copy) HEYＧＩＴＨＵＢ version
 
