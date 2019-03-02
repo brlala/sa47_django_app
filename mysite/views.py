@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Restaurant, Category, Comment
 from django.views.generic import DetailView
 from django.db.models import Q
@@ -47,8 +47,20 @@ def home(request):
 
 # region Teh Li Heng
 # region Detail View page
-class PostDetailView(DetailView):
-    model = Restaurant
+# class PostDetailView(DetailView):
+#     model = Restaurant
+def detail(request, pk):
+    # restaurant = Restaurant.objects.get(id=pk)
+    restaurant = get_object_or_404(Restaurant, pk=pk)
+    # comments = restaurant.comment_set.all()
+    # for comment in comments:
+    #     comment.replies = comment.reply_set.all()
+
+    context = {
+        'restaurant': restaurant,
+        # 'comments': comments,
+    }
+    return render(request, 'mysite/restaurant_detail.html', context)
 
 
 # endregion
