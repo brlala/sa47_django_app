@@ -4,6 +4,7 @@ from django.views.generic import DetailView
 from django.db.models import Q
 
 
+# region Wang Yafeng
 # replaced by class based view
 def home(request):
     categories = Category.objects.all()
@@ -34,6 +35,8 @@ def home(request):
     }
     return render(request, 'mysite/home.html', context)
 
+
+# endregion
 
 # using generic django Class based views, what models to query
 # class PostListView(ListView):
@@ -74,5 +77,4 @@ def about(request):
         'members': members
     }
     return render(request, 'mysite/about.html', context)
-# endregion
 # endregion
