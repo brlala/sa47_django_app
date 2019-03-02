@@ -1,31 +1,39 @@
 {% extends "mysite/base.html" %}
+{% load mathfilters %}
 {% block content %}
 
     <div>
         <form action=" " method="GET">
-            <select>
+            <select name="category">
+                <option value=''>--Choose Category--</option>
                 {% for category in categories %}
-                <option value="category.category_id">{{category.category}}</option>
+                <option id="category"  value='{{category.category}}'>{{category.category}}</option>
                 {% endfor %}
             </select>
-            <input type='text' name='q' placeholder='Search restaurant here...' value='{{request.GET.q}}'/>
+            <input type='text' name='query' placeholder='Search restaurant here...' value='{{request.GET.query}}'/>
             <input type="submit" value="Search"></button>        
         </form>
     </div>
-    <div>
-        {% comment %}this will need to match the variable name of the dictionary key{% endcomment %}
-        {% for post in posts %}
+    <div id='displayarea'>       
+        {% for restaurant in restaurants %}
             <article class="media content-section">
-            <img class="rounded-circle article-img" src="media/{{ post.restaurant_picture }}">
+            <a href="/restaurant/{{restaurant.restaurant_id}}" ><img class="rounded-circle article-img" src="media/{{ post.restaurant_picture }}"></a>
                 <div class="media-body">
                     <div class="article-metadata">
-                        <a class="mr-2" href="#">{{ post.address }}</a>
-                        <small class="text-muted">{{ post.phone_number }}</small>
+                        <a class="mr-2">{{ restaurant.address }}</a>
+                        <small class="text-muted">{{ restaurant.phone_number }}</small>
                     </div>
-                    <h2><a class="article-title" href="#">{{ post.name }}</a></h2>
-                    <p class="article-content">{{ post.description }}</p>
+                    <h2><a class="article-title" href="/restaurant/{{restaurant.restaurant_id}}">{{ restaurant.name }}</a></h2>
+                    <p class="article-content">{{ restaurant.description }}    {{ restaurant.avg_price }}</p>                         
+                    {{restaurant.comment_set.all.count}} reviews
+                    {% if restaurant.comment_set.all.count %}
+                    {% endif %} 
+                    <p>rating:{{restaurant.average}}</p>                      
+
                 </div>
             </article>
+        {% empty %}
+            <p><b>Sorry, no restaurant is found.</b></p>
         {% endfor %}
         <h1></h1>
     </div>

@@ -2,7 +2,9 @@
 
 ## 1) Installation Guide
 
-run the following code in your environment `pip install django-crispy-forms django pillow`
+run the following code in your environment:
+ `pip install django-crispy-forms django pillow`
+ 
  
 
 ### 2) System Features
