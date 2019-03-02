@@ -20,20 +20,52 @@ from .models import Restaurant,Category
 #         'contact': '6778 4441',
 #     }
 # ]
+from django.views.generic import ListView
+
+from .models import Restaurant
 
 
+# # this is the logic how we want to handle when people go to our homepage, we need to map the url and function at urls.py in the project
+# posts = [
+#     {
+#         'name': 'McDonald',
+#         'rating': 4.5,
+#         'description': 'This is a fast food restaurant',
+#         'image': '[insert image here]',
+#         'address': '352 Clementi Ave 2, #01-153, Singapore 120352',
+#         'contact': '6778 2223',
+#     },
+#     {
+#         'name': 'KFC',
+#         'rating': 4.3,
+#         'description': 'This is a fast food restaurant 2',
+#         'image': '[insert image here]',
+#         'address': '379 Clementi Ave 5',
+#         'contact': '6778 4441',
+#     }
+# ]
+
+# replaced by class based view
 def home(request):
     categories=Category.objects.all()
-    queryset_list=Restaurant.objects.all()
+    restaurants=Restaurant.objects.all()
     query=request.GET.get("q")
     if query:
-        queryset_list=queryset_list.filter(name_icontains=query)
-    
-    context = {     
-        'posts': queryset_list,
+        restaurants=restaurants.filter(name_icontains=query)
+
+    context = {
+        'posts': restaurants,
         'categories':categories
     }
     return render(request, 'mysite/home.html', context)
+
+
+# using generic django Class based views, what models to query
+# class PostListView(ListView):
+#     model = Restaurant
+#     template_name = 'mysite/home.html'  # <app>/<model>_<viewtype>.html
+#     context_object_name = 'posts'
+#     ordering = ['name']
 
 
 members = [
