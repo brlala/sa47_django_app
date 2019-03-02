@@ -67,7 +67,14 @@ def home(request):
 #     context_object_name = 'posts'
 #     ordering = ['name']
 
+# region Teh Li Heng
+# region Detail View page
+class PostDetailView(DetailView):
+    model = Restaurant
 
+# endregion
+
+# region About Page
 members = [
     {
         'name': 'Gao Jiaxue',
@@ -84,10 +91,11 @@ members = [
     },
 ]
 
-
 def about(request):
     # items must be passed as dictionary into context
     context = {
         'members': members
     }
     return render(request, 'mysite/about.html', context)
+# endregion
+# endregion
