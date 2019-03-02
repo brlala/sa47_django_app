@@ -1,42 +1,36 @@
 from django.shortcuts import render
-from .models import Restaurant,Category,Comment
+from .models import Restaurant, Category, Comment
 from django.views.generic import DetailView
 from django.db.models import Q
 
 
 # replaced by class based view
 def home(request):
-    categories=Category.objects.all()
-    restaurants=Restaurant.objects.all().order_by('name')
-    query=request.GET.get("query")
-    category=request.GET.get("category")
-    if query:
-        restaurants=restaurants.filter(
-        Q(name__icontains=query)|            
-        Q(address__icontains=query)|
-        Q(description__icontains=query)|
-        Q(category__category__icontains=query)
+    categories = Category.objects.all()
+    restaurants = Restaurant.objects.all().order_by('name')
+    query = request.GET.get("query")
+    category = request.GET.get("category")
+    if query != '' and category:
+        restaurants = restaurants.filter(
+            (Q(name__icontains=query) &
+             Q(category__category_id__iexact=category))
         ).distinct()
-    elif query and category:
-        restaurants=restaurants.filter(
-        (Q(name__icontains=query)|            
-        Q(address__icontains=query)|
-        Q(description__icontains=query))&
-        Q(category__category__icontains=query)
-        ).distinct()
-    
+
+    elif query:
+        restaurants = restaurants.filter(Q(name__icontains=query))
+
     for restaurant in restaurants:
-        rating_total=0
+        rating_total = 0
         if restaurant.comment_set.all():
-            count=restaurant.comment_set.all().count()
+            count = restaurant.comment_set.all().count()
             for comment in restaurant.comment_set.all():
-                rating_total+=comment.rating
-            rating_avg=rating_total/count
-            restaurant.average=rating_avg
+                rating_total += comment.rating
+            rating_avg = rating_total / count
+            restaurant.average = rating_avg
 
     context = {
         'restaurants': restaurants,
-        'categories':categories,
+        'categories': categories,
     }
     return render(request, 'mysite/home.html', context)
 
@@ -52,6 +46,7 @@ def home(request):
 # region Detail View page
 class PostDetailView(DetailView):
     model = Restaurant
+
 
 # endregion
 
@@ -71,6 +66,7 @@ members = [
         'chinese_name': '王亚凤'
     },
 ]
+
 
 def about(request):
     # items must be passed as dictionary into context
