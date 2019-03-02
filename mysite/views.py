@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Restaurant
 
@@ -25,12 +25,12 @@ from .models import Restaurant
 # ]
 
 # replaced by class based view
-def home(request):
-    context = {
-        'posts': Restaurant.objects.all(),  # replace with this once database is created
-        # 'posts': posts
-    }
-    return render(request, 'mysite/home.html', context)
+# def home(request):
+#     context = {
+#         'posts': Restaurant.objects.all(),  # replace with this once database is created
+#         # 'posts': posts
+#     }
+#     return render(request, 'mysite/home.html', context)
 
 
 # using generic django Class based views, what models to query
@@ -40,7 +40,14 @@ class PostListView(ListView):
     context_object_name = 'posts'
     ordering = ['name']
 
+# region Teh Li Heng
+# region Detail View page
+class PostDetailView(DetailView):
+    model = Restaurant
 
+# endregion
+
+# region About Page
 members = [
     {
         'name': 'Gao Jiaxue',
@@ -57,10 +64,11 @@ members = [
     },
 ]
 
-
 def about(request):
     # items must be passed as dictionary into context
     context = {
         'members': members
     }
     return render(request, 'mysite/about.html', context)
+# endregion
+# endregion
