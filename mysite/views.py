@@ -1,33 +1,44 @@
 from django.shortcuts import render
+from django.views.generic import ListView
+
 from .models import Restaurant
 
-# this is the logic how we want to handle when people go to our homepage, we need to map the url and function at urls.py in the project
-posts = [
-    {
-        'name': 'McDonald',
-        'rating': 4.5,
-        'description': 'This is a fast food restaurant',
-        'image': '[insert image here]',
-        'address': '352 Clementi Ave 2, #01-153, Singapore 120352',
-        'contact': '6778 2223',
-    },
-    {
-        'name': 'KFC',
-        'rating': 4.3,
-        'description': 'This is a fast food restaurant 2',
-        'image': '[insert image here]',
-        'address': '379 Clementi Ave 5',
-        'contact': '6778 4441',
-    }
-]
 
+# # this is the logic how we want to handle when people go to our homepage, we need to map the url and function at urls.py in the project
+# posts = [
+#     {
+#         'name': 'McDonald',
+#         'rating': 4.5,
+#         'description': 'This is a fast food restaurant',
+#         'image': '[insert image here]',
+#         'address': '352 Clementi Ave 2, #01-153, Singapore 120352',
+#         'contact': '6778 2223',
+#     },
+#     {
+#         'name': 'KFC',
+#         'rating': 4.3,
+#         'description': 'This is a fast food restaurant 2',
+#         'image': '[insert image here]',
+#         'address': '379 Clementi Ave 5',
+#         'contact': '6778 4441',
+#     }
+# ]
 
+# replaced by class based view
 def home(request):
     context = {
-        'posts': Restaurant.objects.all(), #replace with this once database is created
+        'posts': Restaurant.objects.all(),  # replace with this once database is created
         # 'posts': posts
     }
     return render(request, 'mysite/home.html', context)
+
+
+# using generic django Class based views, what models to query
+class PostListView(ListView):
+    model = Restaurant
+    template_name = 'mysite/home.html'  # <app>/<model>_<viewtype>.html
+    context_object_name = 'posts'
+    ordering = ['name']
 
 
 members = [
