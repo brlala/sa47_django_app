@@ -7,7 +7,7 @@ from . import views
 urlpatterns = [
     path('', views.home, name='mysite-home'),
     # path('', PostListView.as_view(), name='mysite-home'),
-    path('restaurant/<str:pk>', views.detail, name='restaurant-detail'),
+    path('restaurant/<str:pk>', views.detail, name='restaurant-detail-comment'),
     path('about/', views.about, name='mysite-about'),
     path('notification/', views.Message, name='mysite-notification'),
 ]

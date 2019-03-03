@@ -68,14 +68,12 @@
                         <div class="col-md-2">
                             <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
                             <!----TO BE CHANGED----->
-                            <p class="text-secondary text-center">{{ comment.comment_datetime }}</p>
+                            <p class="text-secondary text-center"><strong style="font-size: .9rem">{{ comment.user.user.username }}</strong></p>
                             <!----TO BE CHANGED----->
                         </div>
                         <div class="col-md-10 comment-box">
                             <p>
-                                <a class="float-left"
-                                   href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>{{ comment.user.username }}</strong></a>
-                                <!----TO BE CHANGED----->
+                                {{ comment.comment_datetime }}
                                 {% for star in comment.rating|get_range %}
                                     <span class="float-right"><i class="text-warning fa fa-star"></i></span>
                                 {% endfor %}
