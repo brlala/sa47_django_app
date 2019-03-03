@@ -70,11 +70,6 @@ def detail(request, pk):
     }
     return render(request, 'mysite/restaurant_detail.html', context)
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> b1cb68f464beb2ac572176e3739b51942486f807
 
 # endregion
 
