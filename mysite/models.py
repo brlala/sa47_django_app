@@ -63,7 +63,8 @@ class Reply(models.Model):
         return f'{self.reply} Reply'
 
 # r= Reply()
-# r.comment.user.image.
+# r.reply_datetime
+
 class Notification(models.Model):
     notification_id = models.CharField(max_length=6, primary_key=True)
     reply = models.OneToOneField(Reply, on_delete=models.CASCADE)
