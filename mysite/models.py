@@ -31,8 +31,8 @@ class Restaurant(models.Model):
     def __str__(self):
         return f'{self.name} Restaurant'
     
-    # def get_absolute_url(self):
-    #     return reverse('restaurant-detail',kwargs={'pk':self.pk})
+    def get_absolute_url(self):
+        return reverse('restaurant-detail',kwargs={'pk':self.pk})
 
 
 class Comment(models.Model):
@@ -46,7 +46,9 @@ class Comment(models.Model):
     def __str__(self):
         return f'{self.comment} Comment'
 
-
+# c = Comment()
+# c.user.user.username
+# c.comment_datetime
 class Reply(models.Model):
     reply_id = models.CharField(max_length=6, primary_key=True)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
