@@ -1,6 +1,10 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import DetailView, CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import (
+    DetailView,
+    CreateView, 
+    UpdateView)
 
 from .models import Notification
 from .models import Restaurant, Category
@@ -37,26 +41,30 @@ def home(request):
     }
     return render(request, 'mysite/home.html', context)
 
-# class RestaurantDetailView(DetailView):
-#     model = Restaurant
-    
+class RestaurantDetailView(DetailView):
+    model = Restaurant
 
-
+# class RestaurantCreateView(LoginRequiredMixin,CreateView):  
 class RestaurantCreateView(CreateView):
     model = Restaurant
     fields = ['name', 'category', 'address', 'avg_price', 'phone_number',
               'description', 'start_time', 'end_time', 'restaurant_picture']
 
-    # validation: only manager can create restaurant info
-    def form_valid(self, form):
-        # self.request.user='manager'
-        return super().form_valid(form)
+    #validation: only manager can create restaurant info
+    # def test_func(self):
+    #     if self.request.user=='manager': 
+    #         return True
+    #     return False
 
-
+# class RestaurantUpdateView(LoginRequiredMixin,UpdateView):
 class RestaurantUpdateView(UpdateView):
     model = Restaurant
     fields = ['name', 'category', 'address', 'avg_price', 'phone_number',
               'description', 'start_time', 'end_time', 'restaurant_picture']
+    # def test_func(self):
+    #     if self.request.user=='manager':
+    #         return True
+    #     return False
 
 
 # endregion

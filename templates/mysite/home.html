@@ -34,10 +34,10 @@
                     <p>rating:{{ restaurant.average|floatformat:1}}</p>
                     {% endif %}
                     <p class="article-content">{{ restaurant.description }} {{ restaurant.avg_price }}</p>
-                    <!--{{ restaurant.comment_set.all.count }} reviews-->
-                    <!--{% if restaurant.comment_set.all.count %}-->
-                        <!--{% endif %}-->
-                    <p>rating:{{ restaurant.average }}</p>
+                    {{ restaurant.comment_set.all.count }} reviews
+                    {% if restaurant.comment_set.all.count %}
+                    <p>rating:{{ restaurant.average|floatformat:1 }}</p>
+                    {% endif %}
 
                 </div>
             </article>
