@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.db import models
 from users.models import Profile as Profile
 
@@ -29,6 +30,9 @@ class Restaurant(models.Model):
 
     def __str__(self):
         return f'{self.name} Restaurant'
+    
+    def get_absolute_url(self):
+        return reverse('restaurant-detail',kwargs={'pk':self.pk})
 
 
 class Comment(models.Model):
