@@ -1,45 +1,42 @@
-from django.shortcuts import render
-from .models import Restaurant,Category,Comment
+from django.shortcuts import render, get_object_or_404
+from .models import Restaurant, Category, Comment
 from django.views.generic import DetailView
 from django.db.models import Q
+from .models import Notification
 
-
+# region Wang Yafeng
 # replaced by class based view
 def home(request):
-    categories=Category.objects.all()
-    restaurants=Restaurant.objects.all().order_by('name')
-    query=request.GET.get("query")
-    category=request.GET.get("category")
-    if query:
-        restaurants=restaurants.filter(
-        Q(name__icontains=query)|            
-        Q(address__icontains=query)|
-        Q(description__icontains=query)|
-        Q(category__category__icontains=query)
+    categories = Category.objects.all()
+    restaurants = Restaurant.objects.all().order_by('name')
+    query = request.GET.get("query")
+    category = request.GET.get("category")
+    if query != '' and category:
+        restaurants = restaurants.filter(
+            (Q(name__icontains=query) &
+             Q(category__category_id__iexact=category))
         ).distinct()
-    elif query and category:
-        restaurants=restaurants.filter(
-        (Q(name__icontains=query)|            
-        Q(address__icontains=query)|
-        Q(description__icontains=query))&
-        Q(category__category__icontains=query)
-        ).distinct()
-    
+
+    elif query:
+        restaurants = restaurants.filter(Q(name__icontains=query))
+
     for restaurant in restaurants:
-        rating_total=0
+        rating_total = 0
         if restaurant.comment_set.all():
-            count=restaurant.comment_set.all().count()
+            count = restaurant.comment_set.all().count()
             for comment in restaurant.comment_set.all():
-                rating_total+=comment.rating
-            rating_avg=rating_total/count
-            restaurant.average=rating_avg
+                rating_total += comment.rating
+            rating_avg = rating_total / count
+            restaurant.average = rating_avg
 
     context = {
         'restaurants': restaurants,
-        'categories':categories,
+        'categories': categories,
     }
     return render(request, 'mysite/home.html', context)
 
+
+# endregion
 
 # using generic django Class based views, what models to query
 # class PostListView(ListView):
@@ -50,8 +47,21 @@ def home(request):
 
 # region Teh Li Heng
 # region Detail View page
-class PostDetailView(DetailView):
-    model = Restaurant
+# class PostDetailView(DetailView):
+#     model = Restaurant
+def detail(request, pk):
+    # restaurant = Restaurant.objects.get(id=pk)
+    restaurant = get_object_or_404(Restaurant, pk=pk)
+    # comments = restaurant.comment_set.all()
+    # for comment in comments:
+    #     comment.replies = comment.reply_set.all()
+
+    context = {
+        'restaurant': restaurant,
+        # 'comments': comments,
+    }
+    return render(request, 'mysite/restaurant_detail.html', context)
+
 
 # endregion
 
@@ -72,6 +82,7 @@ members = [
     },
 ]
 
+
 def about(request):
     # items must be passed as dictionary into context
     context = {
@@ -79,4 +90,11 @@ def about(request):
     }
     return render(request, 'mysite/about.html', context)
 # endregion
-# endregion
+
+
+def Message(request):
+    context = {
+        'notification': Notification.objects.filter(recipient_id=request.user.id)
+        #'notification': Notification.objects.filter(recipient_id="1")
+    }
+    return render(request, 'mysite/notification.html', context)
