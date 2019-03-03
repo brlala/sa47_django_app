@@ -77,7 +77,7 @@ def detail(request, pk):
         'restaurant': restaurant,
         # 'comments': comments,
     }
-    return render(request, 'mysite/restaurant_detail.html', context)
+    return render(request, 'mysite/restaurant_detail_comment.html', context)
 
 
 # endregion
