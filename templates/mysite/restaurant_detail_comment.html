@@ -59,21 +59,21 @@
     </div>
 
 
-    <ul>
-        {% for comment in restaurant.comment_set.all %}
-
-            <li>
-                {{ comment.comment }}
-                <ol>
-                    {% for reply in comment.reply_set.all %}
-                        <li>{{ reply.reply }}</li>
-                    {% endfor %}
-                </ol>
-
-            </li>
-
-        {% endfor %}
-    </ul>
+{#    <ul>#}
+{#        {% for comment in restaurant.comment_set.all %}#}
+{##}
+{#            <li>#}
+{#                {{ comment.comment }}#}
+{#                <ol>#}
+{#                    {% for reply in comment.reply_set.all %}#}
+{#                        <li>{{ reply.reply }}</li>#}
+{#                    {% endfor %}#}
+{#                </ol>#}
+{##}
+{#            </li>#}
+{##}
+{#        {% endfor %}#}
+{#    </ul>#}
     <!--Comment Section-->
     {% for comment in restaurant.comment_set.all %}
         <div class="container">
@@ -83,7 +83,7 @@
                         <div class="col-md-2">
                             <img src="{{ comment.user.image.url }}" class="img img-rounded img-fluid"/>
                             <p class="text-secondary text-center"><strong
-                                    style="font-size: .9rem">{{ comment.user.user.username }}</strong></p>
+                                    style="font-size: .8rem">{{ comment.user.user.username }}</strong></p>
                         </div>
                         <div class="col-md-10 comment-box">
                             <p>

@@ -10,7 +10,7 @@ from .models import Restaurant, Category
 # replaced by class based view
 def home(request):
     categories = Category.objects.all()
-    restaurants = Restaurant.objects.all().order_by('name')
+    restaurants = Restaurant.objects.all()
     query = request.GET.get("query")
     category = request.GET.get("category")
     if query != '' and category:
