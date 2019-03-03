@@ -1,0 +1,21 @@
+{% extends "mysite/base.html" %}
+{% block content %}
+<div>
+  {%if notification%}
+  {% for message in notification %}
+  <article class="media content-section">
+    <div class="media-body">
+      <td>
+        <p>{{message.reply.reply_datetime}}</p>
+      </td>
+      <td>
+        <a href="{{message.url}}">{{ message.reply.reply}}</a>
+      </td>
+    </div>
+  </article>
+  {%endfor%}
+  {%else%}
+  <h2>No Notification</h2>
+  {%endif%}
+</div>
+{% endblock %}

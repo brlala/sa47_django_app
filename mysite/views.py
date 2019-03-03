@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Restaurant, Category, Comment
 from django.views.generic import DetailView
 from django.db.models import Q
-
+from .models import Notification
 
 # region Wang Yafeng
 # replaced by class based view
@@ -90,3 +90,11 @@ def about(request):
     }
     return render(request, 'mysite/about.html', context)
 # endregion
+
+
+def Message(request):
+    context = {
+        'notification': Notification.objects.filter(recipient_id=request.user.id)
+        #'notification': Notification.objects.filter(recipient_id="1")
+    }
+    return render(request, 'mysite/notification.html', context)
