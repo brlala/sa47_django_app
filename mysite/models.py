@@ -46,7 +46,7 @@ class Comment(models.Model):
     def __str__(self):
         return f'{self.comment} Comment'
 
-# c = Comment()
+
 # c.user.user.username
 # c.comment_datetime
 class Reply(models.Model):
@@ -54,6 +54,7 @@ class Reply(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     reply = models.TextField()
     reply_datetime = models.DateTimeField()
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "Replies"
@@ -61,7 +62,8 @@ class Reply(models.Model):
     def __str__(self):
         return f'{self.reply} Reply'
 
-
+# r= Reply()
+# r.comment.user.image.
 class Notification(models.Model):
     notification_id = models.CharField(max_length=6, primary_key=True)
     reply = models.OneToOneField(Reply, on_delete=models.CASCADE)
