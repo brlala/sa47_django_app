@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Restaurant, Category, Comment,Notification
 from django.views.generic import CreateView,UpdateView
 from django.db.models import Q
+from .models import Notification
 
 # region Wang Yafeng
 # replaced by class based view
@@ -69,8 +70,11 @@ def detail(request, pk):
     }
     return render(request, 'mysite/restaurant_detail.html', context)
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b1cb68f464beb2ac572176e3739b51942486f807
 
 # endregion
 

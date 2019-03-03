@@ -154,3 +154,11 @@ body {
     display: none;
 }
 
+/*--------------COMMENT SECTION----------*/
+.card-inner{
+    margin-left: 4rem;
+}
+
+.col-md-10.comment-box{
+    padding-bottom: 1rem;
+}
