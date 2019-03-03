@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Restaurant, Category, Comment
-from django.views.generic import DetailView
+from .models import Restaurant, Category, Comment,Notification
+from django.views.generic import CreateView,UpdateView
 from django.db.models import Q
-from .models import Notification
 
 # region Wang Yafeng
 # replaced by class based view
@@ -35,15 +34,23 @@ def home(request):
     }
     return render(request, 'mysite/home.html', context)
 
+class RestaurantCreateView(CreateView):
+    model=Restaurant
+    fields=['name','category','address','avg_price','phone_number',
+    'description','start_time','end_time','restaurant_picture']
 
+# validation: only manager can create restaurant info
+    def form_valid(self, form):
+        # self.request.user='manager'
+        return super().form_valid(form)
+
+class RestaurantUpdateView(UpdateView):
+    model=Restaurant
+    fields=['name','category','address','avg_price','phone_number',
+    'description','start_time','end_time','restaurant_picture']
 # endregion
 
-# using generic django Class based views, what models to query
-# class PostListView(ListView):
-#     model = Restaurant
-#     template_name = 'mysite/home.html'  # <app>/<model>_<viewtype>.html
-#     context_object_name = 'posts'
-#     ordering = ['name']
+
 
 # region Teh Li Heng
 # region Detail View page
@@ -61,6 +68,8 @@ def detail(request, pk):
         # 'comments': comments,
     }
     return render(request, 'mysite/restaurant_detail.html', context)
+
+
 
 
 # endregion
