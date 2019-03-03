@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
-from django.urls import reverse
 from django.db import models
+from django.urls import reverse
+
 from users.models import Profile as Profile
 
 
@@ -28,11 +29,14 @@ class Restaurant(models.Model):
     restaurant_picture = models.ImageField(
         default='restaurant.jpg', upload_to='images/restaurant')
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return f'{self.name} Restaurant'
-    
+
     def get_absolute_url(self):
-        return reverse('restaurant-detail',kwargs={'pk':self.pk})
+        return reverse('restaurant-detail', kwargs={'pk': self.pk})
 
 
 class Comment(models.Model):
@@ -42,6 +46,9 @@ class Comment(models.Model):
     comment = models.TextField()
     rating = models.SmallIntegerField()
     comment_datetime = models.DateTimeField()
+
+    class Meta:
+        ordering = ['-comment_datetime']
 
     def __str__(self):
         return f'{self.comment} Comment'
@@ -58,12 +65,15 @@ class Reply(models.Model):
 
     class Meta:
         verbose_name_plural = "Replies"
+        ordering = ['-reply_datetime']
 
     def __str__(self):
         return f'{self.reply} Reply'
 
+
 # r= Reply()
-# r.comment.user.image.
+# r.reply_datetime
+
 class Notification(models.Model):
     notification_id = models.CharField(max_length=6, primary_key=True)
     reply = models.OneToOneField(Reply, on_delete=models.CASCADE)
