@@ -15,7 +15,7 @@
         </form>
     </div>
     <div id='display-area'>
-        {% for restaurant in restaurants %}
+        {% for restaurant in restaurant_list %}
             <article class="media content-section">
                 <a href="{% url 'restaurant-detail-comment' restaurant.restaurant_id %}"><img alt="restaurant picture"
                                                                                       class="rounded-circle article-img"
@@ -44,6 +44,20 @@
         {% empty %}
             <p><b>Sorry, no restaurant is found.</b></p>
         {% endfor %}
-        <h1></h1>
+        <div class="pagination">
+            <span class="step-links">
+                {% if restaurant_list.has_previous %}
+                    <a href="?page={{ restaurant_list.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ restaurant_list.number }} of {{ restaurant_list.paginator.num_pages }}.
+                </span>
+        
+                {% if restaurant_list.has_next %}
+                    <a href="?page={{ restaurant_list.next_page_number }}">next</a>                    
+                {% endif %}
+            </span>
+        </div>
     </div>
 {% endblock content %}

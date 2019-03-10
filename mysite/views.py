@@ -43,7 +43,7 @@ def home(request):
             restaurant.average = rating_avg
 
     paginator = Paginator(restaurant_list, 3)
-    page = request.GET.get("page")
+    page = request.GET.get('page')
     try:
         restaurants = paginator.page(page)
     except PageNotAnInteger:
