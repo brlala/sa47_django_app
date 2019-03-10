@@ -1,0 +1,18 @@
+{% extends "mysite/base.html" %}
+{% block content %}
+   
+
+ <article class="media content-section">
+    <img alt="restaurant picture" class="rounded-circle article-img" src="media/{{ restaurant.restaurant_picture }}">
+    <div class="media-body">
+    <div class="article-metadata">
+    <a class="mr-2">{{ object.address }}</a>
+    <small class="text-muted">{{ object.phone_number }}</small>
+    </div>
+    <h2 class="article-title">{{ object.name }}</h2>
+    <p class="article-content">{{ object.description }}</p>
+    <label>Price</label>{{ object.avg_price }}
+    <p>Opening Hours:{{ object.start_time}}--{{ object.end_time}}</p> 
+    </div>
+ </article>
+{% endblock content %}

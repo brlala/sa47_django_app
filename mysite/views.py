@@ -1,6 +1,11 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import CreateView, UpdateView
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import (
+    DetailView,
+    CreateView, 
+    UpdateView)
 
 from .models import Notification
 from .models import Restaurant, Category
@@ -10,19 +15,25 @@ from .models import Restaurant, Category
 # replaced by class based view
 def home(request):
     categories = Category.objects.all()
-    restaurants = Restaurant.objects.all()
+    restaurant_list = Restaurant.objects.all()
     query = request.GET.get("query")
     category = request.GET.get("category")
     if query != '' and category:
-        restaurants = restaurants.filter(
-            (Q(name__icontains=query) &
-             Q(category__category_id__iexact=category))
+        restaurant_list = restaurant_list.filter(
+            (Q(name__icontains=query)|
+            Q(description__icontains=query)|
+            Q(address__icontains=query)) &
+             Q(category__category_id__iexact=category)
         ).distinct()
 
     elif query:
-        restaurants = restaurants.filter(Q(name__icontains=query))
+        restaurant_list = restaurant_list.filter(
+            Q(name__icontains=query)|
+            Q(description__icontains=query)|
+            Q(address__icontains=query)
+            )
 
-    for restaurant in restaurants:
+    for restaurant in restaurant_list:
         rating_total = 0
         if restaurant.comment_set.all():
             count = restaurant.comment_set.all().count()
@@ -31,28 +42,46 @@ def home(request):
             rating_avg = rating_total / count
             restaurant.average = rating_avg
 
+    paginator = Paginator(restaurant_list, 3)
+    page = request.GET.get('page')
+    try:
+        restaurants = paginator.page(page)
+    except PageNotAnInteger:
+        restaurants=paginator.page(1)
+    except EmptyPage:
+        restaurants=paginator.page(paginator.num_pages)
+        
+
     context = {
-        'restaurants': restaurants,
+        'restaurant_list': restaurants,
         'categories': categories,
     }
     return render(request, 'mysite/home.html', context)
 
+class RestaurantDetailView(DetailView):
+    model = Restaurant
 
+# class RestaurantCreateView(LoginRequiredMixin,CreateView):  
 class RestaurantCreateView(CreateView):
     model = Restaurant
     fields = ['name', 'category', 'address', 'avg_price', 'phone_number',
               'description', 'start_time', 'end_time', 'restaurant_picture']
 
-    # validation: only manager can create restaurant info
-    def form_valid(self, form):
-        # self.request.user='manager'
-        return super().form_valid(form)
+    #validation: only manager can create restaurant info
+    # def test_func(self):
+    #     if self.request.user=='manager': 
+    #         return True
+    #     return False
 
-
+# class RestaurantUpdateView(LoginRequiredMixin,UpdateView):
 class RestaurantUpdateView(UpdateView):
     model = Restaurant
     fields = ['name', 'category', 'address', 'avg_price', 'phone_number',
               'description', 'start_time', 'end_time', 'restaurant_picture']
+    # def test_func(self):
+    #     if self.request.user=='manager':
+    #         return True
+    #     return False
 
 
 # endregion
