@@ -1,17 +1,24 @@
 {% extends "mysite/base.html" %}
 {% block content %}
 
+
     <div>
         <form action=" " method="GET">
-            <select name="category">
-                <option value=''>--Choose Category--</option>
-                {% for category in categories %}
-                    <option id="category" value='{{ category.category_id }}'>{{ category.category }}</option>
-                {% endfor %}
-            </select>
-
-            <input type='text' name='query' placeholder='Search restaurant here...' value='{{ request.GET.query }}'/>
-            <input type="submit" value="Search">
+            <div class="select">
+                <select name="category">
+                   <option value='' disabled selected>Category</option>
+                    {% for category in categories %}
+                        <option id="category" value='{{ category.category_id }}'>{{ category.category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="wrap">
+                <div class="search">
+                    <input type='text' class="searchTerm" name='query'
+                     placeholder='Search Restaurant...' value='{{ request.GET.query }}'/>
+                    <button type="submit" value="Search" class="searchButton"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
         </form>
     </div>
     <div id='display-area'>
@@ -25,20 +32,26 @@
                         <a class="mr-2">{{ restaurant.address }}</a>
                         <small class="text-muted">{{ restaurant.phone_number }}</small>
                     </div>
-                    <h2><a class="article-title"
-                           href="{% url 'restaurant-detail-comment' restaurant.restaurant_id %}">{{ restaurant.name }}</a></h2>
+                    <span>
+                        <div><h2><a class="article-title"
+                               href="{% url 'restaurant-detail-comment' restaurant.restaurant_id %}">{{ restaurant.name }}</a></h2></div>
+                        <div><a href="{% url 'restaurant-detail-comment' restaurant.restaurant_id %}">
+                            <strong>{{ restaurant.comment_set.all.count }} reviews </strong></a>
+                    </span>
+                    
+                    
+                    <span id="review"><div id="bg"><!--background:graystar-->    
+                        <div id="over" style="width: {% widthratio restaurant.average 1 12 %}px"></div></div><!--width=averge rating*12px,12px is the width of one little star-->
+                    <strong id="rating">{{ restaurant.average|floatformat:1}}</strong></span>                         
+                    
+                    
                     <p class="article-content">{{ restaurant.description }}</p>
-                    <label>Price</label>{{ restaurant.avg_price }}
-                    {{ restaurant.comment_set.all.count }} reviews
-                    {% if restaurant.comment_set.all.count %}    
-                    <p>rating:{{ restaurant.average|floatformat:1}}</p>
-                    {% endif %}
-                    <p class="article-content">{{ restaurant.description }} {{ restaurant.avg_price }}</p>
-                    {{ restaurant.comment_set.all.count }} reviews
-                    {% if restaurant.comment_set.all.count %}
-                    <p>rating:{{ restaurant.average|floatformat:1 }}</p>
-                    {% endif %}
 
+                    <strong class="article-content">$ {{ restaurant.avg_price }}</strong>
+
+                    
+                   
+      
                 </div>
             </article>
         {% empty %}
