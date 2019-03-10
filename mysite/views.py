@@ -1,3 +1,5 @@
+import datetime
+
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -7,8 +9,7 @@ from django.views.generic import (
     CreateView, 
     UpdateView)
 
-from .models import Notification
-from .models import Restaurant, Category
+from .models import Restaurant, Category, Comment, Notification
 
 
 # region Wang Yafeng
@@ -92,6 +93,15 @@ class RestaurantUpdateView(UpdateView):
 # class PostDetailView(DetailView):
 #     model = Restaurant
 def detail(request, pk):
+    if request.method == 'POST':
+        comment_id = "C" + str(Comment.objects.all().count()).zfill(5)
+        rating = request.POST.get("rating")
+        comment = request.POST.get("comment")
+        new_comment = Comment(comment_id=comment_id, comment=comment, rating=rating,
+                              comment_datetime=datetime.datetime.now(), restaurant_id=pk, user_id=request.user.id)
+        new_comment.save()
+
+
     # restaurant = Restaurant.objects.get(id=pk)
     restaurant = get_object_or_404(Restaurant, pk=pk)
     # comments = restaurant.comment_set.all()
