@@ -10,6 +10,10 @@
     font-size:20px;
 }
 
+#rating{
+  font-size:25px;
+}
+
 
 .name_review{
     display: inline-block; 
@@ -51,10 +55,10 @@
 
 /*Resize the wrap to see the search bar change!*/
 .wrap{
-  width: 40%;
+  width: calc(100% - 250px);
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 2%;
+  left:350px;
   transform: translate(-50%, -50%);
 }
 
@@ -74,11 +78,12 @@
   .select {
     position: relative;
     display: block;
-    width: 12em;
-    height: 2em;
+    width: 120px;
+    height: 36px;
     background: #00B4CC;
     overflow: hidden;
     border-radius: .25em;
+    top: 2%;
   }
   select {
     width: 100%;
@@ -122,5 +127,17 @@
 #over{
     height:16px;
 	background:url("../../../media/images/stars/star_org.png") no-repeat;
+}
+
+.display{
+  display: inline-block; 
+}
+.name_price{
+  display: inline-block; 
+}
+
+
+.select-search{
+  display: inline-block; 
 }
 

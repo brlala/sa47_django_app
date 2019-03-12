@@ -13,7 +13,7 @@ from .models import Restaurant, Category, Comment, Notification
 
 
 # region Wang Yafeng
-# replaced by class based view
+
 def home(request):
     categories = Category.objects.all()
     restaurant_list = Restaurant.objects.all()
@@ -43,7 +43,7 @@ def home(request):
             rating_avg = rating_total / count
             restaurant.average = rating_avg
 
-    paginator = Paginator(restaurant_list, 3)
+    paginator = Paginator(restaurant_list, 6)
     page = request.GET.get('page')
     try:
         restaurants = paginator.page(page)

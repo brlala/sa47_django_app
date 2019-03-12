@@ -4,55 +4,61 @@
 
     <div>
         <form action=" " method="GET">
-            <div class="select">
-                <select name="category">
-                   <option value='' disabled selected>Category</option>
-                    {% for category in categories %}
-                        <option id="category" value='{{ category.category_id }}'>{{ category.category }}</option>
-                    {% endfor %}
-                </select>
+            
+            <div class="select-search" >
+                <div class="select">
+                    <select name="category">
+                        <option value='' disabled selected>Category</option>
+                            {% for category in categories %}
+                                <option id="category" value='{{ category.category_id }}'>{{ category.category }}</option>
+                            {% endfor %}
+                    </select>
+                </div> 
             </div>
-            <div class="wrap">
-                <div class="search">
-                    <input type='text' class="searchTerm" name='query'
-                     placeholder='Search Restaurant...' value='{{ request.GET.query }}'/>
+            <div class="select-search">
+                <div class="wrap">
+                    <input type='text' class="searchTerm" name='query' placeholder='Search Restaurant...' value='{{ request.GET.query }}'/>   
                     <button type="submit" value="Search" class="searchButton"><i class="fa fa-search"></i></button>
                 </div>
             </div>
         </form>
     </div>
+    <br/>
     <div id='display-area'>
         {% for restaurant in restaurant_list %}
             <article class="media content-section">
                 <a href="{% url 'restaurant-detail-comment' restaurant.restaurant_id %}"><img alt="restaurant picture"
-                                                                                      class="rounded-circle article-img"
-                                                                                      src="media/{{ restaurant.restaurant_picture }}"></a>
+                   class="rounded-circle article-img" src="media/{{ restaurant.restaurant_picture }}"></a>
                 <div class="media-body">
                     <div class="article-metadata">
-                        <a class="mr-2">{{ restaurant.address }}</a>
-                        <small class="text-muted">{{ restaurant.phone_number }}</small>
+                        <a class="mr-2">{{ restaurant.address }}</a>|
+                        <b><small class="text-muted">{{ restaurant.phone_number }}</small></b>
                     </div>
-                    <span>
-                        <div><h2><a class="article-title"
-                               href="{% url 'restaurant-detail-comment' restaurant.restaurant_id %}">{{ restaurant.name }}</a></h2></div>
-                        <div><a href="{% url 'restaurant-detail-comment' restaurant.restaurant_id %}">
+                    <div class="name_price">
+                        <div class="name_price">
+                            <h2><a href="{% url 'restaurant-detail-comment' restaurant.restaurant_id %}">{{ restaurant.name }}</a></h2>
+                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="name_price">
+                            <strong class="article-content">$ {{ restaurant.avg_price }}</strong>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="display">    
+                        <div class="display"><span id="review"><div id="bg">  
+                            <div id="over" style="width: {% widthratio restaurant.average 1 12 %}px"></div></div>
+                            
+                        </div>
+                        <div class="display">
+                            <strong id="rating">{{ restaurant.average|floatformat:1}}</strong></span>
+                        </div>&nbsp;&nbsp;&nbsp;
+                        <div class="display">
+                            <a href="{% url 'restaurant-detail-comment' restaurant.restaurant_id %}">
                             <strong>{{ restaurant.comment_set.all.count }} reviews </strong></a>
-                    </span>
-                    
-                    
-                    <span id="review"><div id="bg"><!--background:graystar-->    
-                        <div id="over" style="width: {% widthratio restaurant.average 1 12 %}px"></div></div><!--width=averge rating*12px,12px is the width of one little star-->
-                    <strong id="rating">{{ restaurant.average|floatformat:1}}</strong></span>                         
-                    
-                    
+                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>    
                     <p class="article-content">{{ restaurant.description }}</p>
-
-                    <strong class="article-content">$ {{ restaurant.avg_price }}</strong>
-
-                    
-                   
-      
                 </div>
+                <!-- </div> -->
             </article>
         {% empty %}
             <p><b>Sorry, no restaurant is found.</b></p>
