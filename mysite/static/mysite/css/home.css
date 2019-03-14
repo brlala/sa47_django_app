@@ -55,10 +55,10 @@
 
 /*Resize the wrap to see the search bar change!*/
 .wrap{
-  width: calc(100% - 250px);
-  position: absolute;
-  top: 2%;
-  left:350px;
+  width:180%;
+  position: relative;
+  top: 5%;
+  left:180px;
   transform: translate(-50%, -50%);
 }
 
@@ -83,7 +83,7 @@
     background: #00B4CC;
     overflow: hidden;
     border-radius: .25em;
-    top: 2%;
+    top: 5%;
   }
   select {
     width: 100%;
@@ -139,5 +139,6 @@
 
 .select-search{
   display: inline-block; 
+  width:auto;
 }
 
